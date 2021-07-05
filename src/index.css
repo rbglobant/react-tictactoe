@@ -12,10 +12,25 @@ code {
     monospace;
 }
 
+.game-container{
+  margin: 30px auto;
+  width: 300px;
+}
+
+.game-container_board-row{
+  display: flex;
+  flex-direction: row;
+}
+
 .game-container_board-cell{
   width: 100px;
   height: 100px;
   background-color: white;
   border: solid thin #0089ff;
   cursor: pointer;
+}
+
+.game-container_status{
+  text-align: center;
+  display: block;
 }

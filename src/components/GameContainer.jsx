@@ -1,17 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cell from './Cell'
 
 const GameContainer = () => {
+    const [ cells, setCells ] = useState(Array(9).fill(null));
+    const [ isXActive, setIsXActive ] = useState(true);
+    const [ winner, setWinner] = useState(null);
+    const nextPlayer = isXActive ? "X" : "O";
+    const winningLines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+    useEffect(() => {
+        calculateWinner();
+    }, [cells])
+
+    function calculateWinner() {
+        for (let i = 0; i < winningLines.length; i++) {
+          const [a, b, c] = winningLines[i];
+          if (cells[b] && cells[c] && cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
+            console.log('winner',cells[a]);
+            setWinner(cells[a]);
+            return
+          }
+        }
+        for (let i = 0; i < cells.length; i++) {
+          if (cells[i] == null) {
+            return;
+          }
+        }
+        return setWinner('Tie');
+      }
+
+    function restartGame() {
+      setCells(Array(9).fill(null));
+      setIsXActive(true);
+      setWinner(null);
+    }
 
     function renderCell(i) {
         return (
-          <button className="game-container_board-cell">
-            {i}
-          </button>
+        <Cell
+            value={cells[i]}
+            onClick={() => {
+              console.log(winner);
+              if (cells[i] !== null || winner !== null) {
+                return;
+              }
+              const updatedCells= cells.slice();
+              updatedCells[i] = nextPlayer;
+              setCells(updatedCells);
+              setIsXActive(!isXActive);
+            }}
+          />
         );
       }
 
     return ( 
         <div className="game-container">
+            {winner && 
+              <span className="game-container_status">
+                {winner === "Tie" ? `Match result: ${winner}` : `${winner} wins the game!`}
+              </span>
+            }
             <div className="game-container_board">
                 <div className="game-container_board-row">
                     {renderCell(0)}
@@ -29,6 +86,8 @@ const GameContainer = () => {
                     {renderCell(8)}
                 </div>
             </div>
+            <button onClick={() => {restartGame()}}>Restart</button>
+            <button>Rewind</button>
         </div>
      );
 }
