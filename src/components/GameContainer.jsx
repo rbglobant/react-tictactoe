@@ -100,7 +100,7 @@ const GameContainer = () => {
                     {renderCell(8)}
                 </div>
             </div>
-            <button onClick={() => {restartGame()}}>Restart</button>
+            <button id="game-container_restart" onClick={() => {restartGame()}}>Restart</button>
             {previousCells && <button onClick={() => {rewindMove()}}>Undo move</button>}
         </div>
      );
