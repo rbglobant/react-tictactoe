@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.game-container_board-cell{
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border: solid thin #0089ff;
+  cursor: pointer;
+}
