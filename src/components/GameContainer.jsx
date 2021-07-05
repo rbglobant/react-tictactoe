@@ -3,9 +3,10 @@ import Cell from './Cell'
 
 const GameContainer = () => {
     const [ cells, setCells ] = useState(Array(9).fill(null));
+    const [ previousCells, setPreviousCells ] = useState(null);
     const [ isXActive, setIsXActive ] = useState(true);
     const [ winner, setWinner] = useState(null);
-    const nextPlayer = isXActive ? "X" : "O";
+    const currentPlayer = isXActive ? "X" : "O";
     const winningLines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -14,7 +15,7 @@ const GameContainer = () => {
         [1, 4, 7],
         [2, 5, 8],
         [0, 4, 8],
-        [2, 4, 6]
+        [2, 4, 6],
       ];
 
     useEffect(() => {
@@ -40,7 +41,15 @@ const GameContainer = () => {
 
     function restartGame() {
       setCells(Array(9).fill(null));
+      setPreviousCells(null);
       setIsXActive(true);
+      setWinner(null);
+    }
+
+    function rewindMove() {
+      setCells(previousCells.cells);
+      setIsXActive(previousCells.isXActive);
+      setPreviousCells(null);
       setWinner(null);
     }
 
@@ -54,7 +63,8 @@ const GameContainer = () => {
                 return;
               }
               const updatedCells= cells.slice();
-              updatedCells[i] = nextPlayer;
+              updatedCells[i] = currentPlayer;
+              setPreviousCells({cells,isXActive});
               setCells(updatedCells);
               setIsXActive(!isXActive);
             }}
@@ -64,9 +74,13 @@ const GameContainer = () => {
 
     return ( 
         <div className="game-container">
-            {winner && 
+            {winner ? 
               <span className="game-container_status">
                 {winner === "Tie" ? `Match result: ${winner}` : `${winner} wins the game!`}
+              </span>
+              :
+              <span className="game-container_status">
+                {currentPlayer}'s turn
               </span>
             }
             <div className="game-container_board">
@@ -87,7 +101,7 @@ const GameContainer = () => {
                 </div>
             </div>
             <button onClick={() => {restartGame()}}>Restart</button>
-            <button>Rewind</button>
+            {previousCells && <button onClick={() => {rewindMove()}}>Undo move</button>}
         </div>
      );
 }
