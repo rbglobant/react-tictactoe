@@ -61,6 +61,16 @@ describe("<GameContainer />", () => {
     expect(winText).toBe(`Match result: Tie`);
   });
 
+  test("Validate that the reset button works", () => {
+    const wrapper = Enzyme.mount(<GameContainer />);
+    wrapper.find(".game-container_board-cell").at(0).simulate("click");
+    let winText = wrapper.find(".game-container_status").text();
+    expect(winText).toBe(`O's turn`);
+    wrapper.find("#game-container_restart").simulate("click");
+    winText = wrapper.find(".game-container_status").text();
+    expect(winText).toBe(`X's turn`);
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
