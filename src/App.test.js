@@ -1,19 +1,17 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import GameContainer from './components/GameContainer';
-
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<GameContainer />', () => {
-  let wrapper;
-  const setState = jest.fn();
-  const useStateSpy = jest.spyOn(React, 'useState')
-  useStateSpy.mockImplementation((init) => [init, setState]);
-
-  beforeEach(() => {
-    wrapper = Enzyme.shallow(<GameContainer />);
-  });
+  
+    test("Validate it's O's turn after X plays", () => {
+      const wrapper = Enzyme.mount(<GameContainer/>);
+      wrapper.find('.game-container_board-cell').at(0).simulate('click');
+      const winText = wrapper.find('.game-container_status').text();
+      expect(winText).toBe(`O's turn`);
+    });
 
   afterEach(() => {
     jest.clearAllMocks();

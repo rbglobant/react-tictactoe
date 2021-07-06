@@ -26,7 +26,6 @@ const GameContainer = () => {
         for (let i = 0; i < winningLines.length; i++) {
           const [a, b, c] = winningLines[i];
           if (cells[b] && cells[c] && cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-            console.log('winner',cells[a]);
             setWinner(cells[a]);
             return
           }
@@ -58,7 +57,6 @@ const GameContainer = () => {
         <Cell
             value={cells[i]}
             onClick={() => {
-              console.log(winner);
               if (cells[i] !== null || winner !== null) {
                 return;
               }
