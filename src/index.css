@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #2e3d50;
 }
 
 code {
@@ -25,9 +26,11 @@ code {
 .game-container_board-cell{
   width: 100px;
   height: 100px;
-  background-color: white;
-  border: solid thin #0089ff;
+  background-color: #435c7b;
+  border: solid thin #ffffff;
   cursor: pointer;
+  font-size: 82px;
+  color: white;
 }
 
 .game-container_status{
