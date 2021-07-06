@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Cell /> Cell populates with the passed prop value 1`] = `"<button class=\\"game-container_board-cell\\">1</button>"`;
