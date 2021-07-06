@@ -57,6 +57,10 @@ code {
   cursor: pointer;
 }
 
+button.game-container_board-cell:hover {
+  background-color: #3752717d;
+}
+
 .button:hover{
   background-color: white;
   color: #435c7a;
