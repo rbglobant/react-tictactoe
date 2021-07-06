@@ -34,6 +34,30 @@ code {
 }
 
 .game-container_status{
-  text-align: center;
   display: block;
+  color: white;
+  text-transform: uppercase;
+  font-size: 21px;
+  font-weight: 800;
+  padding: 15px 0;
+}
+
+.game-container_restart{
+  border-right: solid thin white;
+}
+
+.button{
+  width: 50%;
+  background-color: #435c7a;
+  border: none;
+  height: 50px;
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: white;
+  color: #435c7a;
 }

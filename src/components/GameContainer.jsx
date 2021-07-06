@@ -98,8 +98,8 @@ const GameContainer = () => {
                     {renderCell(8)}
                 </div>
             </div>
-            <button id="game-container_restart" onClick={() => {restartGame()}}>Restart</button>
-            {previousCells && <button id="game-container_revert" onClick={() => {rewindMove()}}>Undo move</button>}
+            <button className="button" id="game-container_restart" onClick={() => {restartGame()}}>RESTART</button>
+            {previousCells && <button className="button" id="game-container_revert" onClick={() => {rewindMove()}}>UNDO</button>}
         </div>
      );
 }
